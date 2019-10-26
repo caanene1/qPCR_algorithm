@@ -1,10 +1,10 @@
 # Function to caculate primer efficeincy 
-# Assumes a df of least three columns:
+# Assumes a df of at least three columns:
 #                                    Sample.Name : cDNA dilution "1:x"
 #                                    CT          : qPCR CT value
 #                                    Target.Name : Name of gene "primer_pair"
 primer_efficy <- function(x,H2O_name, sep_dilution) {
-  # These names correspond to out of a specific machine
+  # These names correspond to the output of a specific machine
   # Check your output
   #
   dat <- x[c("Sample.Name", "CT", "Target.Name")]
@@ -49,7 +49,7 @@ primer_efficy <- function(x,H2O_name, sep_dilution) {
   # Aggregated data
   agg_data <- lapply(umods, aggregate_CT)
   
-  # Function to format the dultion to plot able
+  # Function to format the dultion
   create_dilute <- function(x){
     xx <- subset(x, !Sample_ == H2O_name)
     xx$Dil <- gsub(paste("*.", sep_dilution, sep = ""), "", xx$Sample_)
