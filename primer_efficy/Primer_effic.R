@@ -5,13 +5,12 @@
 #                                    CT          : qPCR CT value
 #                                    Target.Name : Name of gene "primer_pair"
 # Useage: Rscript Primer_effic.R ~/Desktop/prime_eff.csv h2o :
+# Rscript Primer_effic.R ~/Desktop/B1_PE.csv h2o
 # 
 main <- function() {
   args <- commandArgs(trailingOnly = TRUE)
-  stopifnot(length(args) == 3)
+  stopifnot(length(args) == 2)
   x <- read.csv(args[1])
-  #H2O_name <- args[2]
-  #sep_dilution <- args[3]
   # These names correspond to the output of a specific machine
   dat <- x[c("Sample.Name", "CT", "Target.Name")]
   # Set the id of the Target name to simplify things in the feature
@@ -56,8 +55,7 @@ main <- function() {
   # Function to format the dultion
   create_dilute <- function(x){
     xx <- subset(x, !Sample_ == args[2])
-    xx$Dil <- gsub(paste("*.", args[3], sep = ""), "", xx$Sample_)
-    xx$s_Dil <- log(1/as.numeric(xx$Dil))
+    xx$s_Dil <- log((as.numeric(xx$Sample_)))
     return(xx)
   }
   
