@@ -55,7 +55,7 @@ main <- function() {
   # Function to format the dultion
   create_dilute <- function(x){
     xx <- subset(x, !Sample_ == args[2])
-    xx$s_Dil <- log((as.numeric(xx$Sample_)))
+    xx$s_Dil <- log10((as.numeric(xx$Sample_)))
     return(xx)
   }
   
